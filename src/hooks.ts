@@ -68,12 +68,12 @@ export const useStyle = (w : number, h : number, scale : number) => {
     return {
         rectCircleStyle()  : CSSProperties {
             const top : string = `${h / 2 - size / 2}px`
-            const left : string = `${w / 2 - size / 2}px`
+            const left : string = `${w / 2 - size / 2 + (w / 2 - size / 2) * divideScale(sf, 1, 2)}px`
             const height : string = `${size}px`
             const width : string = `${size}px`
             const background : string = 'indigo'
             const transform = `rotate(${360 * divideScale(sf, 1, 2)}deg)`
-            const borderRadius = `${50 * divideScale(sf, 0, 2)}%`
+            const borderRadius = `${50 * (1 - divideScale(sf, 0, 2))}%`
             return {
                 position, 
                 top, 
