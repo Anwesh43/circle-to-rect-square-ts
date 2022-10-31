@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react'
+import {CSSProperties, useEffect, useState} from 'react'
 
 interface UASProps {
     scale : number, 
@@ -50,5 +50,40 @@ export const useDimension = () : DimensionProps => {
     return {
         w, 
         h
+    }
+}
+
+interface UseStyleProps {
+    rectCircleStyle() : () => CSSProperties
+}
+
+const sinify : (scale : number) => number = (scale : number) : number => Math.sin(scale * Math.PI)
+const maxScale  = (scale : number, i : number, n : number) : number => Math.max(0, scale - i / n)
+const divideScale = (scale : number, i : number, n : number) : number => Math.min(1 / n, maxScale(scale, i, n)) * n 
+
+export const useStyle = (w : number, h : number, scale : number) => {
+    const position = "absolute"
+    const size : number = Math.min(w, h) / 10
+    const sf : number = sinify(scale)
+    return {
+        rectCircleStyle()  : CSSProperties {
+            const top : string = `${h / 2 - size / 2}px`
+            const left : string = `${w / 2 - size / 2}px`
+            const height : string = `${size}px`
+            const width : string = `${size}px`
+            const background : string = 'indigo'
+            const transform = `rotate(${360 * divideScale(sf, 1, 2)}deg)`
+            const borderRadius = `${50 * divideScale(sf, 0, 2)}%`
+            return {
+                position, 
+                top, 
+                left, 
+                width, 
+                height, 
+                background, 
+                transform,
+                borderRadius 
+            }
+        }
     }
 }
