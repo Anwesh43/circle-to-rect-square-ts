@@ -1,5 +1,6 @@
 import React from "react";
 import { useStyle } from "./hooks";
+import withContext from "./withContext";
 
 interface CTRSProps {
     w : number, 
@@ -19,4 +20,4 @@ const CircleToRectSquare = (props : CTRSProps) => {
     )
 }
 
-export default CircleToRectSquare
+export default withContext(CircleToRectSquare)
